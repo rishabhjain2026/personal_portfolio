@@ -1,87 +1,119 @@
 import { Link } from "react-router-dom";
-import { CallToAction, ProjectArtwork } from "../components/Sections.jsx";
+import { CallToAction, Eyebrow, ProjectCard, Reveal, SectionHeading, SkillPills } from "../components/Sections.jsx";
+import { profile, projects, skillGroups } from "../data/portfolio.js";
+import { usePointerGlow } from "../hooks/usePointerGlow.js";
 
-function DeveloperIllustration() {
+function CodeVisual() {
+  const visualRef = usePointerGlow();
   return (
-    <div className="hero-visual" aria-label="An animated developer workspace">
+    <div ref={visualRef} className="hero-visual" aria-label="Animated code editor illustration">
       <div className="visual-grid" />
-      <div className="orbit orbit-one" />
-      <div className="orbit orbit-two" />
-      <div className="float-tag tag-top"><span className="tag-mark">✳</span> systems thinker</div>
-      <div className="float-tag tag-bottom"><span className="tag-pulse" /> currently building</div>
+      <div className="hero-orbit hero-orbit-one" />
+      <div className="hero-orbit hero-orbit-two" />
+      <span className="float-tag tag-top"><span className="tag-mark">✳</span> build with intent</span>
+      <span className="float-tag tag-bottom"><span className="tag-pulse" /> test the edge cases</span>
       <div className="terminal-card">
         <div className="terminal-top">
           <div className="window-dots"><i /><i /><i /></div>
-          <span>good-work.ts</span><span className="terminal-menu">···</span>
+          <span>approach.js</span>
+          <span className="terminal-menu">···</span>
         </div>
-        <div className="terminal-content">
+        <div className="terminal-content" aria-hidden="true">
           <p><span className="code-muted">01</span> <span className="code-purple">const</span> <span className="code-white">approach</span> = {"{"}</p>
-          <p><span className="code-muted">02</span> &nbsp; craft: <span className="code-green">"intentional"</span>,</p>
-          <p><span className="code-muted">03</span> &nbsp; details: <span className="code-green">"considered"</span>,</p>
-          <p><span className="code-muted">04</span> &nbsp; impact: <span className="code-green">"real"</span>,</p>
+          <p><span className="code-muted">02</span> &nbsp; build: <span className="code-green">"useful software"</span>,</p>
+          <p><span className="code-muted">03</span> &nbsp; debug: <span className="code-green">"with curiosity"</span>,</p>
+          <p><span className="code-muted">04</span> &nbsp; test: <span className="code-green">"the details"</span></p>
           <p><span className="code-muted">05</span> {"}"};</p>
           <p className="terminal-blank"><span className="code-muted">06</span></p>
-          <p><span className="code-muted">07</span> <span className="code-purple">await</span> <span className="code-orange">makeItMatter</span>(approach)<span className="cursor">▍</span></p>
+          <p><span className="code-muted">07</span> <span className="code-purple">await</span> <span className="code-orange">makeItReliable</span>()<span className="cursor">▍</span></p>
         </div>
         <div className="terminal-bottom">
-          <span><span className="tiny-green-dot" /> all systems thoughtful</span>
-          <span>UTF-8&nbsp;&nbsp; TypeScript</span>
+          <span><span className="tiny-green-dot" /> quality is part of the build</span>
+          <span>JS&nbsp; / &nbsp;API</span>
         </div>
       </div>
-      <div className="visual-caption"><span>FIG. 01</span><span>THE WORK IS THE POINT.</span></div>
+      <div className="visual-caption"><span>FIG. 01</span><span>BUILD · DEBUG · VERIFY</span></div>
       <span className="orbit-star" aria-hidden="true">✳</span>
     </div>
   );
 }
 
-function ProjectCard({ name, description, variant, category, year, id }) {
-  return (
-    <Link className="project-card" to={`/work#${id}`}>
-      <ProjectArtwork variant={variant} index={variant === "goodform" ? "02" : "01"} label={category} />
-      <div className="project-info">
-        <div><h3>{name}</h3><p>{description}</p></div>
-        <span className="project-arrow">↗</span>
-      </div>
-      <div className="project-tags"><span>{category}</span><span>{year}</span></div>
-    </Link>
-  );
-}
-
 export default function HomePage() {
   return (
-    <main>
+    <main id="main-content">
       <section className="hero page-shell">
         <div className="hero-copy">
-          <p className="eyebrow"><span className="status-dot" /> AVAILABLE FOR SELECT PROJECTS <span className="eyebrow-year">· 2026</span></p>
-          <h1>I build things<br />for the <span className="serif-italic">real world.</span></h1>
-          <p className="hero-description">Senior software engineer turning complex problems into clear, reliable digital experiences. Thoughtful by design. Solid under the hood.</p>
+          <p className="eyebrow hero-eyebrow"><span className="status-dot" /> SOFTWARE DEVELOPER <span className="eyebrow-year">· VIDISHA, INDIA</span></p>
+          <h1 className="hero-headline">
+            <span>Building software.</span>
+            <span className="serif-italic">Checking the details.</span>
+          </h1>
+          <p className="hero-description">
+            I’m {profile.name}, a software developer interested in full-stack
+            applications, practical problem-solving, and the testing that helps
+            make software dependable.
+          </p>
           <div className="hero-actions">
-            <Link className="button button-primary" to="/work">Explore my work <span aria-hidden="true">↗</span></Link>
-            <Link className="text-link" to="/about">A little about me <span aria-hidden="true">↗</span></Link>
+            <Link className="button button-primary" to="/projects">Explore my work <span aria-hidden="true">↗</span></Link>
+            <a className="text-link" href={profile.resume} target="_blank" rel="noreferrer">View resume <span aria-hidden="true">↗</span></a>
           </div>
-          <div className="hero-meta"><span>BASED IN BROOKLYN, NY</span><span className="meta-divider" /><span>BUILDING EVERYWHERE</span></div>
+          <div className="hero-meta">
+            <a href={profile.github} target="_blank" rel="noreferrer">GITHUB <span aria-hidden="true">↗</span></a>
+            <span className="meta-divider" />
+            <a href={profile.linkedin} target="_blank" rel="noreferrer">LINKEDIN <span aria-hidden="true">↗</span></a>
+          </div>
         </div>
-        <DeveloperIllustration />
+        <CodeVisual />
       </section>
 
-      <section className="intro-strip page-shell">
-        <span className="strip-label">A GOOD FIT FOR</span>
-        <p>Ambitious ideas<span> · </span>Complex systems<span> · </span>Teams who care</p>
-        <Link to="/about" aria-label="Learn how I work">↗</Link>
+      <section className="intro-strip page-shell" aria-label="Areas of interest">
+        <span className="strip-label">INTERESTED IN</span>
+        <p>Full-stack development<span> · </span>Backend APIs<span> · </span>Software quality</p>
+        <Link to="/about" aria-label="Learn more about Rishabh">↗</Link>
       </section>
 
       <section className="featured page-shell">
-        <div className="section-heading">
-          <div><p className="eyebrow">A FEW THINGS I’VE WORKED ON</p><h2>Selected <span className="serif-italic">work.</span></h2></div>
-          <Link className="text-link" to="/work">View all projects <span aria-hidden="true">↗</span></Link>
-        </div>
+        <SectionHeading eyebrow="SELECTED PROJECTS" title={<>Selected <span className="serif-italic">work.</span></>} link="/projects" linkLabel="All projects" />
         <div className="project-grid">
-          <ProjectCard id="northstar" name="Northstar" description="A calmer command center for complex operations." variant="northstar" category="PRODUCT ENGINEERING" year="2024" />
-          <ProjectCard id="goodform" name="Goodform" description="Making everyday wellness feel a little more human." variant="goodform" category="FULL-STACK DEVELOPMENT" year="2023" />
+          {projects.slice(0, 2).map((project, index) => (
+            <ProjectCard key={project.slug} project={project} index={`0${index + 1}`} />
+          ))}
         </div>
       </section>
 
-      <CallToAction />
+      <section className="home-snapshot page-shell">
+        <Reveal className="snapshot-copy">
+          <Eyebrow>HOW I LIKE TO WORK</Eyebrow>
+          <h2>Build thoughtfully.<br /><span className="serif-italic">Test the edges.</span></h2>
+          <p>From interface to API to data, I’m interested in how the pieces fit—and what happens when a user takes the less obvious path.</p>
+          <Link className="text-link" to="/quality">See my QA approach <span aria-hidden="true">↗</span></Link>
+        </Reveal>
+        <Reveal className="snapshot-skills" delay={100}>
+          <span className="snapshot-label">TOOLS I’VE WORKED WITH</span>
+          <SkillPills items={["JavaScript", "React", "Node.js", "Express", "PostgreSQL", "Prisma", "Postman", "Docker"]} />
+          <Link className="text-link" to="/skills">Browse skills <span aria-hidden="true">↗</span></Link>
+        </Reveal>
+      </section>
+
+      <section className="experience-preview page-shell">
+        <Reveal className="experience-preview-heading">
+          <Eyebrow>EARLY CAREER</Eyebrow>
+          <h2>Learning by<br /><span className="serif-italic">building.</span></h2>
+          <p>Approximately six months of software development internship experience, including Webseeder and Brandsmashers.</p>
+          <Link className="text-link" to="/experience">Explore experience <span aria-hidden="true">↗</span></Link>
+        </Reveal>
+        <div className="experience-preview-list">
+          {["Webseeder", "Brandsmashers"].map((company, index) => (
+            <Reveal className="experience-preview-row" key={company} delay={index * 100}>
+              <span className="experience-index">0{index + 1}</span>
+              <span>{company}</span>
+              <span className="experience-kind">SOFTWARE DEVELOPMENT INTERNSHIP</span>
+            </Reveal>
+          ))}
+        </div>
+      </section>
+
+      <CallToAction eyebrow="HAVE A QUESTION OR AN IDEA?" title={<>Let’s start<br /><span className="serif-italic">a conversation.</span></>} />
     </main>
   );
 }

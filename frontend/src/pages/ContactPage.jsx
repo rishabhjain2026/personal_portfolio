@@ -1,22 +1,35 @@
-import { Eyebrow } from "../components/Sections.jsx";
+import { Eyebrow, PageIntro } from "../components/Sections.jsx";
+import { profile } from "../data/portfolio.js";
 
 export default function ContactPage() {
   return (
-    <main className="contact-page page-shell">
-      <section className="contact-copy">
-        <Eyebrow available>OPEN TO THE RIGHT CONVERSATION</Eyebrow>
-        <h1>Good things<br />start with <span className="serif-italic">hello.</span></h1>
-        <p className="inner-lede">Have a project, a tricky problem, or just want to compare notes? My inbox is open.</p>
-        <a className="contact-email" href="mailto:hello@example.com">hello@example.com <span>↗</span></a>
-        <div className="contact-note"><span className="note-star">✳</span><p>I usually reply within two working days.<br />Looking forward to hearing from you.</p></div>
+    <main id="main-content" className="contact-page">
+      <PageIntro
+        label="CONTACT · START A CONVERSATION"
+        title={<>Good things<br />start with <span className="serif-italic">hello.</span></>}
+        description="Have a question, a role to discuss, or an interesting problem? Reach out directly."
+        className="contact-intro"
+      />
+      <section className="contact-body page-shell">
+        <div className="contact-copy">
+          <Eyebrow>EMAIL</Eyebrow>
+          <a className="contact-email" href={`mailto:${profile.email}`}>{profile.email} <span aria-hidden="true">↗</span></a>
+          <p className="contact-note">This opens your email application. No contact form or message-storage service is configured on this site.</p>
+        </div>
+        <div className="contact-card">
+          <Eyebrow>FIND ME ELSEWHERE</Eyebrow>
+          <a className="contact-card-link" href={profile.linkedin} target="_blank" rel="noreferrer">
+            <span><small>01</small> LinkedIn</span><span aria-hidden="true">↗</span>
+          </a>
+          <a className="contact-card-link" href={profile.github} target="_blank" rel="noreferrer">
+            <span><small>02</small> GitHub</span><span aria-hidden="true">↗</span>
+          </a>
+          <a className="contact-card-link" href={profile.resume} target="_blank" rel="noreferrer">
+            <span><small>03</small> Resume</span><span aria-hidden="true">↗</span>
+          </a>
+          <p className="contact-card-footer"><span className="status-dot" /> BASED IN {profile.location.toUpperCase()}</p>
+        </div>
       </section>
-      <aside className="contact-card">
-        <Eyebrow>A GOOD PLACE TO BEGIN</Eyebrow>
-        <div className="contact-card-line"><span>01</span><p>What are you working on?</p></div>
-        <div className="contact-card-line"><span>02</span><p>Where would a little help go a long way?</p></div>
-        <div className="contact-card-line"><span>03</span><p>What would a great outcome look like?</p></div>
-        <div className="contact-card-footer"><span className="status-dot" /> CURRENTLY BASED IN BROOKLYN, NY</div>
-      </aside>
     </main>
   );
 }

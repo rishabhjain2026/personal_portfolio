@@ -6,7 +6,9 @@ export default defineConfig({
   plugins: [react()],
   root: fileURLToPath(new URL(".", import.meta.url)),
   build: {
-    outDir: fileURLToPath(new URL("../backend/public/", import.meta.url)),
+    outDir: process.env.VERCEL
+      ? "dist"
+      : fileURLToPath(new URL("../backend/public/", import.meta.url)),
     emptyOutDir: true,
   },
   server: {

@@ -1,75 +1,136 @@
 import { Link } from "react-router-dom";
+import { profile } from "../data/portfolio.js";
+import { useReveal } from "../hooks/useReveal.js";
 
-export function Eyebrow({ children, available = false }) {
+export function Eyebrow({ children, dot = false }) {
   return (
     <p className="eyebrow">
-      {available && <span className="status-dot" />}
+      {dot && <span className="status-dot" aria-hidden="true" />}
       {children}
     </p>
   );
 }
 
-export function CallToAction({ eyebrow = "HAVE A GOOD ONE IN MIND?", title = <>Let’s make<br /><span className="serif-italic">it real.</span></> }) {
+export function Reveal({
+  children,
+  className = "",
+  delay = 0,
+  as: Tag = "div",
+  ariaHidden,
+}) {
+  const { ref, visible } = useReveal();
+  return (
+    <Tag
+      className={`reveal${visible ? " is-visible" : ""}${className ? ` ${className}` : ""}`}
+      ref={ref}
+      aria-hidden={ariaHidden}
+      style={{ "--reveal-delay": `${delay}ms` }}
+    >
+      {children}
+    </Tag>
+  );
+}
+
+export function PageIntro({ label, title, description, className = "" }) {
+  return (
+    <section className={`page-intro page-shell ${className}`}>
+      <Eyebrow>{label}</Eyebrow>
+      <h1>{title}</h1>
+      {description && <p className="page-lede">{description}</p>}
+    </section>
+  );
+}
+
+export function SectionHeading({ eyebrow, title, link, linkLabel }) {
+  return (
+    <div className="section-heading">
+      <div>
+        <Eyebrow>{eyebrow}</Eyebrow>
+        <h2>{title}</h2>
+      </div>
+      {link && (
+        <Link className="text-link" to={link}>
+          {linkLabel} <span aria-hidden="true">↗</span>
+        </Link>
+      )}
+    </div>
+  );
+}
+
+export function ProjectArtwork({ project, large = false }) {
+  return (
+    <div
+      className={`project-artwork artwork-${project.artwork}${large ? " artwork-large" : ""}`}
+      aria-hidden="true"
+    >
+      <div className="artwork-grid" />
+      <div className="artwork-window">
+        <div className="artwork-window-top">
+          <span /><span /><span />
+          <b>{project.slug}.js</b>
+        </div>
+        <div className="artwork-code">
+          <span>01</span> <i>const</i> <b>{project.shortName.toLowerCase()}</b> = {"{"}
+          <br />
+          <span>02</span> &nbsp; build: <em>"with care"</em>,
+          <br />
+          <span>03</span> &nbsp; quality: <em>"in the details"</em>
+          <br />
+          <span>04</span> {"}"}
+          <strong>▍</strong>
+        </div>
+      </div>
+      <span className="artwork-index">{project.category}</span>
+      <span className="artwork-orbit" />
+    </div>
+  );
+}
+
+export function ProjectCard({ project, index = "01" }) {
+  return (
+    <Reveal className="project-card-wrap">
+      <Link className="project-card" to={`/projects/${project.slug}`}>
+        <ProjectArtwork project={project} />
+        <div className="project-info">
+          <div>
+            <span className="project-card-index">{index} / {project.category}</span>
+            <h3>{project.name}</h3>
+            <p>{project.summary}</p>
+          </div>
+          <span className="project-arrow" aria-hidden="true">↗</span>
+        </div>
+        <span className="project-tags">
+          {project.stack.slice(0, 4).join(" · ")}
+        </span>
+      </Link>
+    </Reveal>
+  );
+}
+
+export function CallToAction({
+  eyebrow = "A GOOD PLACE TO START",
+  title = <>Let’s build<br /><span className="serif-italic">something useful.</span></>,
+}) {
   return (
     <section className="home-cta page-shell">
       <Eyebrow>{eyebrow}</Eyebrow>
       <div className="cta-row">
         <h2>{title}</h2>
-        <Link className="round-link" to="/contact" aria-label="Start a conversation">↗</Link>
+        <Link className="round-link" to="/contact" aria-label="Go to contact page">
+          ↗
+        </Link>
       </div>
-      <a className="cta-email" href="mailto:hello@example.com">hello@example.com <span>↗</span></a>
+      <a className="cta-email" href={`mailto:${profile.email}`}>
+        {profile.email} <span aria-hidden="true">↗</span>
+      </a>
     </section>
   );
 }
 
-export function ProjectArtwork({ variant, index, label }) {
-  if (variant === "goodform" || variant === "goodform-work") {
-    return (
-      <div className={variant === "goodform-work" ? "work-art goodform-visual" : "project-visual goodform-visual"}>
-        <span className="goodform-stamp">good<br />form<span>®</span></span>
-        <span className="goodform-caption">A healthier relationship with the everyday.</span>
-        <span className="visual-index">{index} / {label}</span>
-      </div>
-    );
-  }
-
-  if (variant === "fieldnotes") {
-    return (
-      <div className="work-art fieldnotes-visual">
-        <div className="fieldnotes-paper">
-          <span>FIELD<br />NOTES</span>
-          <i>ISSUE 08 — 2022</i>
-          <b>Make room<br />for the work.</b>
-        </div>
-        <span className="visual-index">{index} / {label}</span>
-      </div>
-    );
-  }
-
+export function SkillPills({ items }) {
   return (
-    <div className={variant === "northstar-work" ? "work-art northstar-visual" : "project-visual northstar-visual"}>
-      <span className="project-orb orb-blue" />
-      <span className="project-window">
-        <i /><i /><i /><b>northstar / overview</b><span className="chart-line" />
-      </span>
-      <span className="visual-index">{index} / {label}</span>
-    </div>
-  );
-}
-
-export function WorkProject({ id, variant, index, label, category, year, name, summary, role, focus }) {
-  return (
-    <article className="work-entry" id={id}>
-      <ProjectArtwork variant={variant} index={index} label={label} />
-      <div className="work-details">
-        <Eyebrow>{category} · {year}</Eyebrow>
-        <h2>{name}</h2>
-        <p>{summary}</p>
-        <div className="work-meta">
-          <div><span>MY ROLE</span><p>{role}</p></div>
-          <div><span>FOCUS</span><p>{focus}</p></div>
-        </div>
-      </div>
-    </article>
+    <ul className="skill-pills">
+      {items.map((item) => <li key={item}>{item}</li>)}
+    </ul>
   );
 }

@@ -1,96 +1,57 @@
-# Alex Morgan — developer portfolio
+# Rishabh Jain — Software Developer Portfolio
 
-A responsive React portfolio with an Express server. The React application and its dependencies live in `frontend`; the Express server and its dependencies live in `backend`. Vite generates the frontend production build directly into `backend/public`, which Express serves with static middleware. There is no database or `.env` file.
+A responsive, dark-themed, multi-page React portfolio with a cinematic hero, lightweight motion, project detail pages, and a clearly labeled QA demonstration. The portfolio content is kept in `frontend/src/data/portfolio.js`.
 
 ## Run locally
 
-Install Node.js 20 or newer, install each application's dependencies from its own folder, and start the Vite development server:
+Use Node.js 20 or newer. In PowerShell, install dependencies and start the Vite development server:
 
-```sh
+```powershell
 cd frontend
 npm ci
 npm run dev
 ```
 
-Open the Vite URL printed in the terminal (usually `http://localhost:5173`). To build the frontend and run the production server:
+Vite prints the local URL (usually `http://localhost:5173`). Open each route directly, including `/projects/safe-reach` and `/quality`, to verify navigation and refresh behavior.
 
-```sh
+## Build and run the production app
+
+```powershell
 cd frontend
 npm run build
-cd ../backend
+cd ..\backend
 npm ci
 npm start
 ```
 
-The production server defaults to `http://localhost:3000`, reads the hosting platform's `PORT` setting when provided, serves the built React app from `backend/public`, and responds to `GET /api/health` with `{"status":"ok"}`. Each folder has its own `package.json`, lockfile, and `node_modules`.
+The default server address is `http://localhost:3000`; set `PORT` in the host environment to change it. The existing Vite build writes to `backend/public`, and Express serves that build and falls back to the React app for client-side routes. `GET /api/health` returns `{"status":"ok"}`. The portfolio does not need a database, API credentials, or `.env` file.
 
-## Deploy to AWS
+## Docker and AWS
 
-The root `Dockerfile` builds the frontend and backend separately, then packages the frontend build with the production Express server. Build the image from the project root so Docker can access both folders. The server binds to `0.0.0.0` and uses the `PORT` supplied by AWS. No database or `.env` file is required.
+Build the image from the repository root; the multi-stage Dockerfile builds the frontend, installs only backend production dependencies in the runtime image, and serves the static build from Express:
 
-## Personalize before publishing
+```powershell
+docker build -t rishabh-jain-portfolio .
+docker run --rm -p 3000:3000 -e PORT=3000 rishabh-jain-portfolio
+```
 
-The name, biography, location, availability, email address, social links, project descriptions, skills, dates, and metadata are sample portfolio content. Replace them with accurate details in the React components under `frontend/src/pages` and `frontend/src/components`. Search those files for `Alex Morgan`, `Brooklyn`, and `hello@example.com`. Update page metadata in `frontend/src/App.jsx` and `frontend/index.html` as well. The sample projects and experience are illustrative and should not be presented as your own until replaced.
+Open `http://localhost:3000`. For AWS, publish and run the image using your own registry, instance, networking, and environment settings. Allow inbound traffic only on the port exposed by your service. No cloud resources are created or changed by this project.
 
-The contact link opens the visitor's email application; the server does not store or send messages.
+## Vercel frontend
 
+Create a Vercel project from the same repository and set **Root Directory** to `frontend`. The included `frontend/vercel.json` configures the Vite build output and rewrites deep links to the React entry point. On Vercel, Vite writes to `frontend/dist`; for local and Express/Docker builds, it continues writing to `backend/public`.
 
+Vercel serves the frontend only. It does not run the Express server from this deployment. The current portfolio has no frontend API dependency: contact uses `mailto:` and there is no contact form or message storage. If a future feature calls the Express API from the Vercel site, host that backend separately and configure an explicit allowlist for the Vercel origin before adding cross-origin requests.
 
+## Portfolio content and interactions
 
+- Update verified profile and project content in `frontend/src/data/portfolio.js`.
+- Resume access points to the supplied Google Drive link; email opens the email application's `mailto:` handler.
+- The QA scenario selector is an illustrative example only. It does not issue an API request or access a database.
+- Project features are based on the corresponding public repositories. Only the assessment repository advertises a live URL; other projects link to their source repositories.
+- The introductory mark is shown once per browser session and can be skipped. Scroll reveals and the interface respect reduced-motion preferences.
+- No animation library or contact-service dependency is required.
 
+## Validation
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-ec2 instance kar aws par instance create kar 
-
-id par click karke connce kar 
-
-in ssh clientt
-
-
-how to connce vali command dikhagi uskio run kar in terminla in root directoy
-
-connet ho gy ec2 machine par ab jo install karna ha vo kar sakhtrah ha apan
-
-sudo dnf update -y
-
-
-sudo dnf install -y docker
-install docker on aws
-
-now to set the same environment we use image
-
-image create kar then on docker hub then pust to aws
-
-
-in aws terminal
-docker build -t deployment-fullstack
-
-docker run -p 5050:3000 imagename
-
-
-image ko docker hub par dal de
-
-
-docker login
-
-sudo docker tag deployment-fullstack:latest rishabh16009/portfolio:latest
-
-docker push rishabh16009/portfolio:tagname
-
-
-docker pull rishabh16009/portfolio
-jo docker hub pad dala usko aws par lane ka,liya
-
+Run `npm run build` from `frontend` to verify and generate the production frontend. Run `npm start` from `backend` after building, then visit `/api/health` and refresh a nested route such as `/projects/safe-reach`. Docker and Vercel deployment behavior depends on your deployment configuration and should be checked in those environments.
