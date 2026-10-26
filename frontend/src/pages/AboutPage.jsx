@@ -18,11 +18,7 @@ export default function AboutPage() {
       <section className="about-body page-shell">
         <Reveal className="about-aside">
           <Eyebrow>A LITTLE CONTEXT</Eyebrow>
-          <div className="identity-art" aria-label="R J monogram illustration">
-            <div className="identity-orbit" />
-            <span>RJ<span>.</span></span>
-            <small>SOFTWARE · QUALITY · CURIOSITY</small>
-          </div>
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQy2lF8odKdL30D5Skm82Er3gr1uaS_fUXBCcf2hrcHmw&s=10"></img>
           <p className="aside-note">A developer who likes to ask<br />“what could go wrong?”</p>
         </Reveal>
         <Reveal className="about-copy" delay={100}>
