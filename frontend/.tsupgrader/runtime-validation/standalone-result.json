@@ -1,0 +1,27 @@
+{
+  "planHash": "a7e4f3966e68b2566fa2e7b678e20436ecf604b3c0e1bf1d792e8cc22dcd3ae5",
+  "phase": "standalone",
+  "recordedAtUtc": "2026-10-26T18:57:00.3921009Z",
+  "retryCount": 1,
+  "resetBaseline": false,
+  "complete": true,
+  "result": {
+    "setupSucceeded": false,
+    "setupDurationMs": 7903,
+    "setupFailureOutput": "setup step 0 \u0027npm\u0027 failed (exit=-4048, timedOut=False)\r\nnpm ERR! code EPERM\r\nnpm ERR! syscall unlink\r\nnpm ERR! path C:\\Users\\jain0\\Aimerz\\portfolio\\frontend\\node_modules\\@rollup\\rollup-win32-x64-msvc\\rollup.win32-x64-msvc.node\r\nnpm ERR! errno -4048\r\nnpm ERR! Error: EPERM: operation not permitted, unlink \u0027C:\\Users\\jain0\\Aimerz\\portfolio\\frontend\\node_modules\\@rollup\\rollup-win32-x64-msvc\\rollup.win32-x64-msvc.node\u0027\r\nnpm ERR!  [Error: EPERM: operation not permitted, unlink \u0027C:\\Users\\jain0\\Aimerz\\portfolio\\frontend\\node_modules\\@rollup\\rollup-win32-x64-msvc\\rollup.win32-x64-msvc.node\u0027] {\r\nnpm ERR!   errno: -4048,\r\nnpm ERR!   code: \u0027EPERM\u0027,\r\nnpm ERR!   syscall: \u0027unlink\u0027,\r\nnpm ERR!   path: \u0027C:\\\\Users\\\\jain0\\\\Aimerz\\\\portfolio\\\\frontend\\\\node_modules\\\\@rollup\\\\rollup-win32-x64-msvc\\\\rollup.win32-x64-msvc.node\u0027\r\nnpm ERR! }\r\nnpm ERR! \r\nnpm ERR! The operation was rejected by your operating system.\r\nnpm ERR! It\u0027s possible that the file was already in use (by a text editor or antivirus),\r\nnpm ERR! or that you lack permissions to access it.\r\nnpm ERR! \r\nnpm ERR! If you believe this might be a permissions issue, please double-check the\r\nnpm ERR! permissions of the file and its containing directories, or try running\r\nnpm ERR! the command again as root/Administrator.\r\n\r\nnpm ERR! A complete log of this run can be found in: C:\\Users\\jain0\\AppData\\Local\\npm-cache\\_logs\\2026-10-26T18_56_56_474Z-debug-0.log\r\n",
+    "assertions": [],
+    "executions": [
+      {
+        "source": "setup[0]",
+        "resolvedExecutable": "C:\\nvm4w\\nodejs\\npm.CMD",
+        "args": [
+          "ci"
+        ],
+        "cwd": "C:\\Users\\jain0\\Aimerz\\portfolio\\frontend",
+        "env": {},
+        "prependPath": [],
+        "platform": "win32"
+      }
+    ]
+  }
+}

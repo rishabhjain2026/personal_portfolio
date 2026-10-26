@@ -1,6 +1,6 @@
 # Rishabh Jain — Software Developer Portfolio
 
-A responsive, near-edge-to-edge framed portfolio inspired by the supplied Dribbble reference: a black-and-white palette, a lime accent, a portrait-led full-stack hero, oversized display typography, and an animated build/test marquee. Shared navigation includes Home, About, Projects, Experience, QA, Education, Milestones, and Contact; a full footer repeats key destinations and contact links. Page transitions, scroll reveals, and the marquee respect reduced-motion preferences. Project detail pages and a clearly labeled QA demonstration remain part of the site. The portfolio content is kept in `frontend/src/data/portfolio.js`; the profile portrait is stored locally in `frontend/public/rishabh-jain-profile.jpg`.
+A responsive, near-edge-to-edge framed portfolio inspired by the supplied Dribbble reference: a cinematic black canvas, neon-lime accents, oversized display typography, and an animated portrait-led developer workspace with code, terminal, technology, and featured-project panels. The homepage uses the locally stored portrait at `frontend/public/rishabh-jain-profile.jpg`. Shared navigation includes Home, About, Projects, Experience, QA, Education, Milestones, and Contact; a full footer repeats key destinations and contact links. Page transitions, scroll reveals, and the marquee respect reduced-motion preferences. Project detail pages and a clearly labeled QA demonstration remain part of the site. The portfolio content is kept in `frontend/src/data/portfolio.js`.
 
 ## Run locally
 

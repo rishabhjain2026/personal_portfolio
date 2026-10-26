@@ -1,26 +1,42 @@
 import { Link } from "react-router-dom";
 import { CallToAction, Eyebrow, ProjectCard, Reveal, SectionHeading, SkillPills } from "../components/Sections.jsx";
 import { profile, projects, skillGroups } from "../data/portfolio.js";
-import { usePointerGlow } from "../hooks/usePointerGlow.js";
 
-function PortraitPanel() {
-  const portraitRef = usePointerGlow();
+function HeroVisual() {
   return (
-    <div ref={portraitRef} className="hero-portrait">
-      <span className="portrait-corner portrait-corner-top" aria-hidden="true">01 / VIDISHA, INDIA</span>
-      <img
-        src={profile.portrait}
-        alt={`Portrait of ${profile.name}`}
-        fetchPriority="high"
-        width="460"
-        height="460"
-      />
-      <span className="portrait-caption">
-        <span>SOFTWARE DEVELOPER</span>
-        <span className="portrait-caption-mark" aria-hidden="true">RJ<span>.</span></span>
-      </span>
-      <span className="portrait-corner portrait-corner-bottom" aria-hidden="true">BUILD · TEST · REFINE</span>
-      <span className="portrait-accent" aria-hidden="true" />
+    <div className="hero-visual" aria-label="Developer portrait with code, terminal, technology, and project panels">
+      <div className="visual-orbit visual-orbit-outer" aria-hidden="true" />
+      <div className="visual-orbit visual-orbit-inner" aria-hidden="true" />
+      <div className="visual-glow" aria-hidden="true" />
+      <div className="hero-portrait-wrap">
+        <img className="hero-portrait" src={profile.portrait} alt="Rishabh Jain" />
+      </div>
+      <div className="hero-desk" aria-hidden="true">
+        <div className="hero-desk-surface" />
+        <div className="hero-laptop"><span>RJ<span>.</span></span></div>
+      </div>
+      <div className="hero-code-card hero-float">
+        <div className="panel-heading"><span><i /> workspace.js</span><small>JS</small></div>
+        <pre><code><b>function</b> buildReliableSoftware() {`{`}<br />&nbsp; <em>design</em>();<br />&nbsp; <em>test</em>();<br />&nbsp; <strong>ship</strong>();<br />{`}`}</code></pre>
+      </div>
+      <div className="hero-terminal-card hero-float">
+        <div className="panel-heading"><span>TERMINAL</span><small>— □ ×</small></div>
+        <p><i>rj@portfolio</i>:~$ <span className="terminal-typing">npm run build</span></p>
+        <p className="terminal-success">✓ Build completed <span>in 1.42s</span></p>
+        <p><i>rj@portfolio</i>:~$ <span className="terminal-cursor">_</span></p>
+      </div>
+      <div className="hero-tech-card hero-float">
+        <span className="tech-card-label">TOOLS IN THE WORKFLOW</span>
+        <div className="tech-icons" aria-label="JavaScript, React, Node.js, PostgreSQL, Docker, and Postman">
+          <span title="JavaScript">JS</span><span title="React">⚛</span><span title="Node.js">N</span>
+          <span title="PostgreSQL">P</span><span title="Docker">D</span><span title="Postman">↗</span>
+        </div>
+      </div>
+      <Link className="hero-project-card hero-float" to="/projects/safe-reach">
+        <div className="project-preview-art"><span>SR</span><i /><i /><i /></div>
+        <div className="project-preview-copy"><small>FEATURED PROJECT · 01</small><b>SafeReach</b><span>Full-stack safety platform <i aria-hidden="true">↗</i></span></div>
+      </Link>
+      <div className="hero-orbit-tag" aria-hidden="true"><span /> BUILD · TEST · REFINE</div>
     </div>
   );
 }
@@ -78,32 +94,28 @@ export default function HomePage() {
   return (
     <main id="main-content">
       <section className="hero page-shell">
-        <div className="hero-side-title" aria-hidden="true">
-          <span>01</span>
-          <span className="hero-side-rule" />
-          <span>FULL-STACK<br />DEVELOPER</span>
-        </div>
-        <PortraitPanel />
         <div className="hero-copy">
-          <p className="eyebrow hero-eyebrow"><span className="status-dot" /> RISHABH JAIN <span className="eyebrow-year">· SOFTWARE DEVELOPER</span></p>
+          <p className="eyebrow hero-eyebrow"><span className="status-dot" /> SOFTWARE DEVELOPER <span className="eyebrow-year">| FULL-STACK · QA ENTHUSIAST</span></p>
           <h1 className="hero-headline">
-            <span>Full-stack</span>
-            <span>Developer<span className="accent-dot">.</span></span>
+            <span>Building Software<span className="accent-dot">.</span></span>
+            <span>Solving Problems<span className="accent-dot">.</span></span>
+            <span>Ensuring Quality<span className="accent-dot">.</span></span>
           </h1>
-          <p className="hero-position">SOFTWARE DEVELOPMENT <span>/</span> QA ENTHUSIAST</p>
-          <p className="hero-description">I build useful applications, develop backend APIs, work with data, and care about the details that make software reliable.</p>
+          <p className="hero-description">I’m Rishabh Jain, a software developer focused on building useful applications, solving technical problems, and creating reliable digital experiences through thoughtful engineering and testing.</p>
           <div className="hero-actions">
-            <Link className="button button-primary" to="/projects">Explore portfolio <span aria-hidden="true">↗</span></Link>
-            <Link className="text-link" to="/contact">Let’s talk <span aria-hidden="true">↗</span></Link>
+            <Link className="button button-primary" to="/projects">Explore My Work <span aria-hidden="true">↗</span></Link>
+            <a className="button button-secondary" href={profile.resume} target="_blank" rel="noreferrer">View Resume <span aria-hidden="true">↗</span></a>
+            <Link className="text-link" to="/contact">Let’s Connect <span aria-hidden="true">↗</span></Link>
           </div>
           <div className="hero-bottom">
             <div className="hero-stats">
-              <span><b>~06</b><small>MONTHS EXPERIENCE</small></span>
-              <span><b>CSE</b><small>SATIE, VIDISHA</small></span>
+              <span><b>~06</b><small>MONTHS INTERNSHIP EXPERIENCE</small></span>
+              <span><b>CSE</b><small>SATIE · VIDISHA, INDIA</small></span>
             </div>
             <SocialLinks />
           </div>
         </div>
+        <HeroVisual />
       </section>
 
       <div className="home-marquee" aria-hidden="true">
