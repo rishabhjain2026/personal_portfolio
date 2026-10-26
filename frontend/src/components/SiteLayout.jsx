@@ -110,6 +110,9 @@ function SiteFooter() {
         <div className="footer-connect">
           <span className="eyebrow">HAVE A PROJECT IN MIND?</span>
           <a href={`mailto:${profile.email}`}>{profile.email}<span aria-hidden="true"> ↗</span></a>
+          <p>
+  Contact: <a href="tel:+918982697532">+91 89826 97532</a>
+</p>
         </div>
       </div>
       <div className="footer-bottom">
