@@ -24,6 +24,7 @@ function OpeningMark() {
   return (
     <div className="opening-mark" role="status" aria-label="Rishabh Jain">
       <span>RJ<span className="accent-dot">.</span></span>
+      <small>RISHABH JAIN · SOFTWARE DEVELOPER</small>
       <button
         type="button"
         className="intro-skip"
@@ -77,7 +78,16 @@ function SiteHeader() {
         aria-label="Main navigation"
       >
         {navigation.map(({ to, label, end }) => (
-          <NavLink key={to} to={to} end={end}>
+          <NavLink
+            key={to}
+            to={to}
+            end={end}
+            className={({ isActive }) =>
+              [to === "/contact" ? "nav-cta" : "", isActive ? "active" : ""]
+                .filter(Boolean)
+                .join(" ")
+            }
+          >
             {label}
           </NavLink>
         ))}
@@ -89,15 +99,27 @@ function SiteHeader() {
 function SiteFooter() {
   return (
     <footer className="site-footer page-shell">
-      <Link className="wordmark footer-wordmark" to="/" aria-label="Rishabh Jain home">
-        <span className="wordmark-mark">rj<span>.</span></span>
-      </Link>
-      <p>Built with curiosity and care. <span>© {new Date().getFullYear()} Rishabh Jain</span></p>
-      <div className="footer-links">
-        <Link to="/education">EDUCATION</Link>
-        <Link to="/achievements">MILESTONES</Link>
-        <a href={profile.linkedin} target="_blank" rel="noreferrer">LINKEDIN ↗</a>
-        <a href={profile.github} target="_blank" rel="noreferrer">GITHUB ↗</a>
+      <div className="footer-main">
+        <div className="footer-identity">
+          <Link className="wordmark footer-wordmark" to="/" aria-label="Rishabh Jain home">
+            <span className="wordmark-mark">rj<span>.</span></span>
+            <span className="wordmark-label">RISHABH JAIN</span>
+          </Link>
+          <p>Thoughtful software.<br /><span>Carefully built and tested.</span></p>
+        </div>
+        <div className="footer-connect">
+          <span className="eyebrow">HAVE A PROJECT IN MIND?</span>
+          <a href={`mailto:${profile.email}`}>{profile.email}<span aria-hidden="true"> ↗</span></a>
+        </div>
+      </div>
+      <div className="footer-bottom">
+        <p>© {new Date().getFullYear()} Rishabh Jain <span>· Built with curiosity and care.</span></p>
+        <nav className="footer-links" aria-label="Footer navigation">
+          <Link to="/education">Education</Link>
+          <Link to="/achievements">Milestones</Link>
+          <a href={profile.linkedin} target="_blank" rel="noreferrer">LinkedIn ↗</a>
+          <a href={profile.github} target="_blank" rel="noreferrer">GitHub ↗</a>
+        </nav>
       </div>
     </footer>
   );
@@ -110,11 +132,15 @@ export default function SiteLayout() {
     <>
       <a className="skip-link" href="#main-content">Skip to content</a>
       <OpeningMark />
-      <SiteHeader />
-      <div className="page-transition" key={location.pathname}>
-        <Outlet />
+      <div className="portfolio-frame">
+        <span className="frame-annotation frame-annotation-left" aria-hidden="true">RJ / PORTFOLIO — 2026</span>
+        <span className="frame-annotation frame-annotation-right" aria-hidden="true">BUILD · TEST · REFINE</span>
+        <SiteHeader />
+        <div className="page-transition" key={location.pathname}>
+          <Outlet />
+        </div>
+        <SiteFooter />
       </div>
-      <SiteFooter />
     </>
   );
 }

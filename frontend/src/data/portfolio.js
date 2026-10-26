@@ -1,6 +1,7 @@
 export const profile = {
   name: "Rishabh Jain",
   initials: "RJ",
+  portrait: "/rishabh-jain-profile.jpg",
   email: "Rishabh.tech26@gmail.com",
   location: "Vidisha, Madhya Pradesh",
   linkedin: "https://www.linkedin.com/in/rishabh-jain-b64347276/",
@@ -16,9 +17,8 @@ export const profile = {
 export const navigation = [
   { to: "/", label: "Home", end: true },
   { to: "/about", label: "About" },
-  { to: "/experience", label: "Experience" },
   { to: "/projects", label: "Projects" },
-  { to: "/skills", label: "Skills" },
+  { to: "/experience", label: "Experience" },
   { to: "/quality", label: "QA" },
   { to: "/education", label: "Education" },
   { to: "/achievements", label: "Milestones" },

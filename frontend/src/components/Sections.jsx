@@ -32,11 +32,26 @@ export function Reveal({
 }
 
 export function PageIntro({ label, title, description, className = "" }) {
+  const sectionNumber = {
+    "ABOUT": "02",
+    "EXPERIENCE": "03",
+    "PROJECTS": "04",
+    "SKILLS": "05",
+    "QUALITY": "06",
+    "QUALITY ASSURANCE": "06",
+    "EDUCATION": "07",
+    "MILESTONES": "08",
+    "CONTACT": "09",
+  }[label.split(" · ")[0]] ?? "01";
+
   return (
     <section className={`page-intro page-shell ${className}`}>
-      <Eyebrow>{label}</Eyebrow>
-      <h1>{title}</h1>
-      {description && <p className="page-lede">{description}</p>}
+      <div className="page-intro-copy">
+        <Eyebrow>{label}</Eyebrow>
+        <h1>{title}</h1>
+        {description && <p className="page-lede">{description}</p>}
+      </div>
+      <span className="page-intro-mark" aria-hidden="true">{sectionNumber}</span>
     </section>
   );
 }
@@ -64,23 +79,52 @@ export function ProjectArtwork({ project, large = false }) {
       aria-hidden="true"
     >
       <div className="artwork-grid" />
-      <div className="artwork-window">
+      <div className="product-preview">
         <div className="artwork-window-top">
           <span /><span /><span />
-          <b>{project.slug}.js</b>
+          <b>{project.name}</b>
+          <small>UI STUDY · ILLUSTRATIVE</small>
         </div>
-        <div className="artwork-code">
-          <span>01</span> <i>const</i> <b>{project.shortName.toLowerCase()}</b> = {"{"}
-          <br />
-          <span>02</span> &nbsp; build: <em>"with care"</em>,
-          <br />
-          <span>03</span> &nbsp; quality: <em>"in the details"</em>
-          <br />
-          <span>04</span> {"}"}
-          <strong>▍</strong>
+        <div className="mock-interface">
+          <aside className="mock-sidebar">
+            <i />
+            <span />
+            <span />
+            <span />
+            <span />
+          </aside>
+          <div className="mock-content">
+            <div className="mock-heading">
+              <span />
+              <i />
+            </div>
+            {project.artwork === "safe-reach" ? (
+              <div className="mock-map">
+                <span className="map-route" />
+                <i className="map-pin map-pin-start">A</i>
+                <i className="map-pin map-pin-end">B</i>
+                <span className="mock-status"><i /> JOURNEY ACTIVE</span>
+              </div>
+            ) : project.artwork === "assessment" ? (
+              <div className="mock-question">
+                <span />
+                <i />
+                <i />
+                <i />
+                <b><i /></b>
+              </div>
+            ) : (
+              <div className="mock-deploy">
+                <span><i /> BUILD COMPLETED</span>
+                <div />
+                <div />
+                <div />
+              </div>
+            )}
+            <div className="mock-ui-footer"><span /><span /><span /><span /></div>
+          </div>
         </div>
       </div>
-      <span className="artwork-index">{project.category}</span>
       <span className="artwork-orbit" />
     </div>
   );

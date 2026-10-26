@@ -3,38 +3,74 @@ import { CallToAction, Eyebrow, ProjectCard, Reveal, SectionHeading, SkillPills 
 import { profile, projects, skillGroups } from "../data/portfolio.js";
 import { usePointerGlow } from "../hooks/usePointerGlow.js";
 
-function CodeVisual() {
-  const visualRef = usePointerGlow();
+function PortraitPanel() {
+  const portraitRef = usePointerGlow();
   return (
-    <div ref={visualRef} className="hero-visual" aria-label="Animated code editor illustration">
-      <div className="visual-grid" />
-      <div className="hero-orbit hero-orbit-one" />
-      <div className="hero-orbit hero-orbit-two" />
-      <span className="float-tag tag-top"><span className="tag-mark">✳</span> build with intent</span>
-      <span className="float-tag tag-bottom"><span className="tag-pulse" /> test the edge cases</span>
-      <div className="terminal-card">
-        <div className="terminal-top">
-          <div className="window-dots"><i /><i /><i /></div>
-          <span>approach.js</span>
-          <span className="terminal-menu">···</span>
-        </div>
-        <div className="terminal-content" aria-hidden="true">
-          <p><span className="code-muted">01</span> <span className="code-purple">const</span> <span className="code-white">approach</span> = {"{"}</p>
-          <p><span className="code-muted">02</span> &nbsp; build: <span className="code-green">"useful software"</span>,</p>
-          <p><span className="code-muted">03</span> &nbsp; debug: <span className="code-green">"with curiosity"</span>,</p>
-          <p><span className="code-muted">04</span> &nbsp; test: <span className="code-green">"the details"</span></p>
-          <p><span className="code-muted">05</span> {"}"};</p>
-          <p className="terminal-blank"><span className="code-muted">06</span></p>
-          <p><span className="code-muted">07</span> <span className="code-purple">await</span> <span className="code-orange">makeItReliable</span>()<span className="cursor">▍</span></p>
-        </div>
-        <div className="terminal-bottom">
-          <span><span className="tiny-green-dot" /> quality is part of the build</span>
-          <span>JS&nbsp; / &nbsp;API</span>
-        </div>
-      </div>
-      <div className="visual-caption"><span>FIG. 01</span><span>BUILD · DEBUG · VERIFY</span></div>
-      <span className="orbit-star" aria-hidden="true">✳</span>
+    <div ref={portraitRef} className="hero-portrait">
+      <span className="portrait-corner portrait-corner-top" aria-hidden="true">01 / VIDISHA, INDIA</span>
+      <img
+        src={profile.portrait}
+        alt={`Portrait of ${profile.name}`}
+        fetchPriority="high"
+        width="460"
+        height="460"
+      />
+      <span className="portrait-caption">
+        <span>SOFTWARE DEVELOPER</span>
+        <span className="portrait-caption-mark" aria-hidden="true">RJ<span>.</span></span>
+      </span>
+      <span className="portrait-corner portrait-corner-bottom" aria-hidden="true">BUILD · TEST · REFINE</span>
+      <span className="portrait-accent" aria-hidden="true" />
     </div>
+  );
+}
+
+function SocialLinks() {
+  return (
+    <div className="hero-socials" aria-label="Social links">
+      <a href={profile.github} target="_blank" rel="noreferrer" aria-label="GitHub profile">GH</a>
+      <a href={profile.linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn profile">in</a>
+      <a href={profile.resume} target="_blank" rel="noreferrer" aria-label="View resume">CV</a>
+    </div>
+  );
+}
+
+function HomeAbout() {
+  return (
+    <section className="home-about page-shell">
+      <div className="home-about-copy">
+        <Eyebrow>02 / A LITTLE ABOUT ME</Eyebrow>
+        <div className="home-about-heading">
+          <h2>About<span className="accent-dot">.</span></h2>
+          <span className="section-orbit" aria-hidden="true">RJ</span>
+        </div>
+        <p className="about-lead">I like getting underneath the interface—understanding what the API, the data, and the unexpected input are doing.</p>
+        <p className="about-copy-body">{profile.education} I’m building on that foundation through software development internships and practical full-stack projects.</p>
+        <Link className="text-link" to="/about">A little more about my approach <span aria-hidden="true">↗</span></Link>
+      </div>
+      <div className="home-about-cards">
+        <Reveal className="about-skill-card">
+          <span>01 / TOOLKIT</span>
+          <h3>Tech stack</h3>
+          <p>JavaScript · React · Node.js · Express · PostgreSQL · Prisma</p>
+        </Reveal>
+        <Reveal className="about-skill-card" delay={80}>
+          <span>02 / APPLICATIONS</span>
+          <h3>Full-stack</h3>
+          <p>Frontend interfaces, backend APIs, databases, and authentication workflows.</p>
+        </Reveal>
+        <Reveal className="about-skill-card" delay={150}>
+          <span>03 / DELIVERY</span>
+          <h3>Development tools</h3>
+          <p>Git · GitHub · Postman · Docker · AWS</p>
+        </Reveal>
+        <Reveal className="about-skill-card" delay={220}>
+          <span>04 / QUALITY</span>
+          <h3>QA mindset</h3>
+          <p>Manual checks, negative paths, API validation, and thoughtful bug reports.</p>
+        </Reveal>
+      </div>
+    </section>
   );
 }
 
@@ -42,40 +78,48 @@ export default function HomePage() {
   return (
     <main id="main-content">
       <section className="hero page-shell">
+        <div className="hero-side-title" aria-hidden="true">
+          <span>01</span>
+          <span className="hero-side-rule" />
+          <span>FULL-STACK<br />DEVELOPER</span>
+        </div>
+        <PortraitPanel />
         <div className="hero-copy">
-          <p className="eyebrow hero-eyebrow"><span className="status-dot" /> SOFTWARE DEVELOPER <span className="eyebrow-year">· VIDISHA, INDIA</span></p>
+          <p className="eyebrow hero-eyebrow"><span className="status-dot" /> RISHABH JAIN <span className="eyebrow-year">· SOFTWARE DEVELOPER</span></p>
           <h1 className="hero-headline">
-            <span>Building software.</span>
-            <span className="serif-italic">Checking the details.</span>
+            <span>Full-stack</span>
+            <span>Developer<span className="accent-dot">.</span></span>
           </h1>
-          <p className="hero-description">
-            I’m {profile.name}, a software developer interested in full-stack
-            applications, practical problem-solving, and the testing that helps
-            make software dependable.
-          </p>
+          <p className="hero-position">SOFTWARE DEVELOPMENT <span>/</span> QA ENTHUSIAST</p>
+          <p className="hero-description">I build useful applications, develop backend APIs, work with data, and care about the details that make software reliable.</p>
           <div className="hero-actions">
-            <Link className="button button-primary" to="/projects">Explore my work <span aria-hidden="true">↗</span></Link>
-            <a className="text-link" href={profile.resume} target="_blank" rel="noreferrer">View resume <span aria-hidden="true">↗</span></a>
+            <Link className="button button-primary" to="/projects">Explore portfolio <span aria-hidden="true">↗</span></Link>
+            <Link className="text-link" to="/contact">Let’s talk <span aria-hidden="true">↗</span></Link>
           </div>
-          <div className="hero-meta">
-            <a href={profile.github} target="_blank" rel="noreferrer">GITHUB <span aria-hidden="true">↗</span></a>
-            <span className="meta-divider" />
-            <a href={profile.linkedin} target="_blank" rel="noreferrer">LINKEDIN <span aria-hidden="true">↗</span></a>
+          <div className="hero-bottom">
+            <div className="hero-stats">
+              <span><b>~06</b><small>MONTHS EXPERIENCE</small></span>
+              <span><b>CSE</b><small>SATIE, VIDISHA</small></span>
+            </div>
+            <SocialLinks />
           </div>
         </div>
-        <CodeVisual />
       </section>
 
-      <section className="intro-strip page-shell" aria-label="Areas of interest">
-        <span className="strip-label">INTERESTED IN</span>
-        <p>Full-stack development<span> · </span>Backend APIs<span> · </span>Software quality</p>
-        <Link to="/about" aria-label="Learn more about Rishabh">↗</Link>
-      </section>
+      <div className="home-marquee" aria-hidden="true">
+        <div className="home-marquee-track" aria-hidden="true">
+          {Array.from({ length: 4 }, (_, index) => (
+            <span key={index}>BUILD WITH INTENT <i>✳</i> TEST WITH CARE <i>✳</i> SHIP WITH CONFIDENCE <i>✳</i></span>
+          ))}
+        </div>
+      </div>
+
+      <HomeAbout />
 
       <section className="featured page-shell">
-        <SectionHeading eyebrow="SELECTED PROJECTS" title={<>Selected <span className="serif-italic">work.</span></>} link="/projects" linkLabel="All projects" />
+        <SectionHeading eyebrow="03 / WORK & EXPERIENCE" title={<>Selected <span>projects.</span></>} link="/projects" linkLabel="View all projects" />
         <div className="project-grid">
-          {projects.slice(0, 2).map((project, index) => (
+          {projects.map((project, index) => (
             <ProjectCard key={project.slug} project={project} index={`0${index + 1}`} />
           ))}
         </div>
@@ -83,8 +127,8 @@ export default function HomePage() {
 
       <section className="home-snapshot page-shell">
         <Reveal className="snapshot-copy">
-          <Eyebrow>HOW I LIKE TO WORK</Eyebrow>
-          <h2>Build thoughtfully.<br /><span className="serif-italic">Test the edges.</span></h2>
+          <Eyebrow>04 / DEVELOPMENT × QUALITY</Eyebrow>
+          <h2>Build carefully.<br /><span>Test the details.</span></h2>
           <p>From interface to API to data, I’m interested in how the pieces fit—and what happens when a user takes the less obvious path.</p>
           <Link className="text-link" to="/quality">See my QA approach <span aria-hidden="true">↗</span></Link>
         </Reveal>
@@ -97,7 +141,7 @@ export default function HomePage() {
 
       <section className="experience-preview page-shell">
         <Reveal className="experience-preview-heading">
-          <Eyebrow>EARLY CAREER</Eyebrow>
+          <Eyebrow>05 / INTERNSHIPS</Eyebrow>
           <h2>Learning by<br /><span className="serif-italic">building.</span></h2>
           <p>Approximately six months of software development internship experience, including Webseeder and Brandsmashers.</p>
           <Link className="text-link" to="/experience">Explore experience <span aria-hidden="true">↗</span></Link>
