@@ -1,0 +1,115 @@
+{
+  "generatedAt": "2026-10-26T00:00:00Z",
+  "generatedOnPlatform": "win32",
+  "projectType": "webapp",
+  "setup": [
+    {
+      "command": "npm",
+      "args": [
+        "ci",
+        "--legacy-peer-deps"
+      ]
+    },
+    {
+      "command": "npm",
+      "args": [
+        "ci",
+        "--prefix",
+        "..\\backend"
+      ]
+    }
+  ],
+  "assertions": [
+    {
+      "name": "frontend-production-build",
+      "kind": "process",
+      "command": "npm",
+      "args": [
+        "run",
+        "build"
+      ],
+      "verificationMethod": "exit-code",
+      "expected": "0",
+      "timeoutSeconds": 300
+    },
+    {
+      "name": "tests-pass",
+      "kind": "process",
+      "command": "npm",
+      "args": [
+        "test"
+      ],
+      "verificationMethod": "test-results",
+      "expected": "0",
+      "timeoutSeconds": 300
+    },
+    {
+      "name": "vite-serves-home",
+      "kind": "http-probe",
+      "startCommand": "npm",
+      "startArgs": [
+        "run",
+        "dev",
+        "--",
+        "--host",
+        "127.0.0.1",
+        "--port",
+        "5187",
+        "--strictPort"
+      ],
+      "url": "http://127.0.0.1:5187/",
+      "verificationMethod": "http-status",
+      "expected": "200",
+      "timeoutSeconds": 120
+    },
+    {
+      "name": "vite-serves-deep-link",
+      "kind": "http-probe",
+      "startCommand": "npm",
+      "startArgs": [
+        "run",
+        "dev",
+        "--",
+        "--host",
+        "127.0.0.1",
+        "--port",
+        "5188",
+        "--strictPort"
+      ],
+      "url": "http://127.0.0.1:5188/education",
+      "verificationMethod": "http-status",
+      "expected": "200",
+      "timeoutSeconds": 120
+    },
+    {
+      "name": "express-health-endpoint",
+      "kind": "http-probe",
+      "startCommand": "node",
+      "startArgs": [
+        "..\\backend\\server.js"
+      ],
+      "env": {
+        "PORT": "3187"
+      },
+      "url": "http://127.0.0.1:3187/api/health",
+      "verificationMethod": "http-status",
+      "expected": "200",
+      "timeoutSeconds": 120
+    },
+    {
+      "name": "express-serves-deep-link",
+      "kind": "http-probe",
+      "startCommand": "node",
+      "startArgs": [
+        "..\\backend\\server.js"
+      ],
+      "env": {
+        "PORT": "3188"
+      },
+      "url": "http://127.0.0.1:3188/education",
+      "verificationMethod": "http-status",
+      "expected": "200",
+      "timeoutSeconds": 120
+    }
+  ]
+}
